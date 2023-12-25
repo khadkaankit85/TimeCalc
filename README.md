@@ -1,0 +1,1 @@
+This is basically going to be a time calculator. Everytime I start reading, I will punch in with my name and then It will calculate the time on the basis of punch in and punch out. I will create a text file so data will not be lost.
