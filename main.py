@@ -1,5 +1,5 @@
 from datetime import datetime
-dateformat="%Y-%m-%d %H:%M:%S.%10f"
+dateformat="%Y-%m-%d %H:%M:%S"
 timeList=[]
 dayOne=[]
 dayAll=[]
@@ -9,12 +9,14 @@ def menu():
     
 
 def punchIn():
-    logInTime=str(datetime.now())
+    uneditedTime1=datetime.now()
+    logInTime=str(uneditedTime1.replace(microsecond=0))
     with open("StudiedTime.txt","a") as textfile:
         textfile.write(logInTime+"==>")
         
 def punchOut():
-    logOutTime=str(datetime.now())
+    uneditedTime2=datetime.now()
+    logOutTime=str(uneditedTime2.replace(microsecond=0))
     with open ("StudiedTime.txt","a") as textfile:
         textfile.write(logOutTime+"\n")
         
@@ -25,15 +27,16 @@ def studiedTime():
         for line in lines:
             dateStr=line.split("==>")
             for dateString in dateStr:
-                dateformatted=datetime.strptime(dateString,dateformat)
+                dateformatted=datetime.strptime(dateString.strip(),dateformat)
                 timeList.append(dateformatted)
             
         for i in range(0,len(timeList)-1,2):
             dayOne=timeList[i+1]-timeList[i]
             dayAll.append(dayOne)
             
-        for i,screentime in enumerate(dayAll):
+        for i,screentime in enumerate(dayAll,start=1):
             print(f"{i}. I Studied for {screentime}.\n")
+        
     
 while True: 
     menu()
